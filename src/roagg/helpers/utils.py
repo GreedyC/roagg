@@ -63,3 +63,8 @@ def string_word_count(string: str) -> int:
     if not string:
         return 0
     return len(string.strip().split())
+
+def capitalize_first(value: str) -> str:
+    if not value:
+        return value
+    return value[0].upper() + value[1:]

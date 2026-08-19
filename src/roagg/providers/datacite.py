@@ -4,7 +4,7 @@ import logging
 import json
 from roagg.helpers.utils import get_roagg_version
 from roagg.models.research_output_item import ResearchOutputItem
-from roagg.helpers.utils import match_patterns, string_word_count
+from roagg.helpers.utils import match_patterns, string_word_count, capitalize_first
 
 class DataCiteAPI:
     def __init__(self, page_size: int = 500, name: List[str] = [], ror: str = ""):
@@ -100,7 +100,9 @@ class DataCiteAPI:
             record.resourceType = attributes.get("types", {}).get("citeproc")
         if record.resourceType is None or record.resourceType == "":
             record.resourceType = attributes.get("types", {}).get("bibtex")
-            
+        
+        record.dataCiteResourceType = record.resourceType
+        record.resourceType = capitalize_first(record.resourceType) if record.resourceType else None
 
         record.isPublisher = (
             publisher_attr.get("publisherIdentifier") == self.ror or 

@@ -31,6 +31,7 @@ class ResearchOutputItem:
     inOpenAlex: bool = None
     inCrossRef: bool = None
     #datacite specific
+    dataCiteResourceType: str = None
     dataCiteClientId: str = None
     dataCiteClientName: str = None
     dataCiteCitationCount: int = None
@@ -38,11 +39,13 @@ class ResearchOutputItem:
     dataCiteViewCount: int = None
     dataCiteDownloadCount: int = None
     #openaire specific
+    openAireResourceType: str = None
     openAireBestAccessRight: str = None
     openAireIndicatorsUsageCountsDownloads: int = None
     openAireIndicatorsUsageCountsViews: int = None
     openAireId: str = None
     #openalex specific
+    openAlexResourceType: str = None
     openAlexId: str = None
     openAlexCitedByCount: int = None
     openAlexReferencedWorksCount: int = None

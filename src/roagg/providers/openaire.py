@@ -3,7 +3,7 @@ import urllib.request
 import logging
 import json
 from roagg.models.research_output_item import ResearchOutputItem
-from roagg.helpers.utils import find_doi_in_text, is_valid_doi, string_word_count
+from roagg.helpers.utils import find_doi_in_text, is_valid_doi, string_word_count, capitalize_first
 
 class OpenAireAPI:
     openaire_base_url = "https://api.openaire.eu/graph/v1/"
@@ -101,12 +101,14 @@ class OpenAireAPI:
                     isLatestVersion=None,
                     isConceptDoi=None,
                     inOpenAire=True,
+                    openAireResourceType=r.get('type', None),
                     openAireBestAccessRight=openAireBestAccessRight,
                     openAireIndicatorsUsageCountsDownloads=openAireIndicatorsUsageCountsDownloads,
                     openAireIndicatorsUsageCountsViews=openAireIndicatorsUsageCountsViews,
                     openAireId=r.get('id', None),
                     titleWordCount=string_word_count(r.get('mainTitle', None))
                 )
+                item.resourceType = capitalize_first(item.resourceType) if item.resourceType else None
                 self.results.append(item)
                 doi_to_item[item.doi.lower()] = item  # Add to lookup dictionary
 

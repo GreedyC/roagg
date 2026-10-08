@@ -33,6 +33,7 @@ Roagg collects a fiew fields for each resource found and do de-duplications base
 |haveContributorAffiliation            |bool   |True if the the any contributor match the requested organisation                       |
 |isLatestVersion                       |bool   |True if the DataCite metadata indicates this beeing the latest version                 |
 |isConceptDoi                          |bool   |True if the DataCite metadata indicates this beeing a concept DOI                      |
+|conceptDoi                            |string |DOI from a DataCite IsVersionOf DOI relation; a concept DOI's own DOI; empty otherwise  |
 |matchPublisherRor                     |bool   |True if the ROR id for publisher match the ROR in the provided argument                |
 |matchCreatorAffiliationRor            |bool   |True if the ROR id for a creator affiliation match the ROR in the provided argument    |
 |matchContributorAffiliationRor        |bool   |True if the ROR id for a contributor affiliation match the ROR in the provided argument|
@@ -62,6 +63,12 @@ Roagg collects a fiew fields for each resource found and do de-duplications base
 |referencedByDoi                       |string |DOI of object(s) (for instance papers) referencing this object (JSON list)                                                                                       |
 
 </details>
+
+`conceptDoi` links version records to their concept without matching titles. It is
+appended to the CSV columns. `isLatestVersion` still follows the explicit DataCite
+relations: repositories that omit previous/new-version relations can mark several
+versions as latest. Consumers can group by `conceptDoi` and compare `createdAt`, but
+creation dates alone do not prove version ordering, especially for partial results.
 
 ## Install
 ```bash

@@ -52,3 +52,4 @@ class ResearchOutputItem:
     #extra fields
     titleWordCount: int = None
     referencedByDoi: str = None
+    conceptDoi: str = None

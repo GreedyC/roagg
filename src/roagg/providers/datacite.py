@@ -137,6 +137,14 @@ class DataCiteAPI:
             versionOfCount == 0   
         )
 
+        record.conceptDoi = next((
+            relation.get("relatedIdentifier")
+            for relation in attributes.get("relatedIdentifiers", [])
+            if relation.get("relationType") == "IsVersionOf"
+            and relation.get("relatedIdentifierType") == "DOI"
+            and relation.get("relatedIdentifier")
+        ), record.doi if record.isConceptDoi else None)
+
         record.haveCreatorAffiliation = self.check_agent_list_match(attributes.get("creators", []))
         record.haveContributorAffiliation = self.check_agent_list_match(attributes.get("contributors", []))
         return record
